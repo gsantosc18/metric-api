@@ -1,0 +1,33 @@
+version: '3'
+services:
+
+  jaeger:
+    container_name: jaeger
+    image: jaegertracing/all-in-one:1.47
+    ports:
+      - 16686:16686
+      - 14250:14250
+    networks:
+      - dev-infra
+
+  app:
+    container_name: app
+    build: 
+      context: ../
+      dockerfile: DockerFile
+    environment:
+      - OTEL_SERVICE_NAME=my-application
+      - OTEL_METRICS_EXPORTER=none
+      - OTEL_TRACES_EXPORTER=jaeger
+      - OTEL_EXPORTER_JAEGER_ENDPOINT=http://jaeger:14250
+    ports:
+      - 8080:8080
+    networks:
+      - dev-infra
+    depends_on:
+      - jaeger
+
+networks:
+  dev-infra:
+    external: true
+    name: dev-infra
