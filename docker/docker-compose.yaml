@@ -1,6 +1,23 @@
 version: '3'
 services:
 
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'metric-app'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'root'
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - my-db:/var/lib/mysql
+    networks:
+      - dev-infra
+
   jaeger:
     container_name: jaeger
     image: jaegertracing/all-in-one:1.47
@@ -26,8 +43,11 @@ services:
       - dev-infra
     depends_on:
       - jaeger
+      - db
 
 networks:
   dev-infra:
     external: true
     name: dev-infra
+volumes:
+  my-db:

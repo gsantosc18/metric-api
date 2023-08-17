@@ -1,0 +1,14 @@
+spring:
+  main:
+    banner-mode: OFF
+  datasource:
+    url: jdbc:${DB_TYPE:mysql}:${DB_HOST://localhost/metric-app}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:root}
+    driver-class-name: ${DB_DRIVER:com.mysql.cj.jdbc.Driver}
+
+  jpa:
+    show-sql: ${SHOW_SQL:true}
+    database-platform: ${DB_PLATFORM:org.hibernate.dialect.MySQLDialect}
+    hibernate:
+      ddl-auto: 'update'
