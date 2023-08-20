@@ -1,8 +1,10 @@
 spring:
+  application:
+    name: metrics-app
   main:
     banner-mode: OFF
   datasource:
-    url: jdbc:${DB_TYPE:mysql}:${DB_HOST://localhost/metric-app}
+    url: jdbc:${DB_TYPE:mysql}://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:metric-app}
     username: ${DB_USERNAME:root}
     password: ${DB_PASSWORD:root}
     driver-class-name: ${DB_DRIVER:com.mysql.cj.jdbc.Driver}
@@ -12,3 +14,12 @@ spring:
     database-platform: ${DB_PLATFORM:org.hibernate.dialect.MySQLDialect}
     hibernate:
       ddl-auto: 'update'
+
+management:
+  endpoints:
+    web:
+      base-path: /
+      exposure:
+        include:
+          - health
+          - prometheus
