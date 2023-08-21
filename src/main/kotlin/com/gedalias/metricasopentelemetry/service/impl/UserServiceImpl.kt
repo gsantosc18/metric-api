@@ -6,19 +6,24 @@ import com.gedalias.metricasopentelemetry.domain.dto.UserDTO
 import com.gedalias.metricasopentelemetry.domain.exception.UserNotFoundException
 import com.gedalias.metricasopentelemetry.domain.mapper.toDTO
 import com.gedalias.metricasopentelemetry.domain.mapper.updateValues
+import com.gedalias.metricasopentelemetry.metrics.UserMetrics
 import com.gedalias.metricasopentelemetry.persistence.UserPersistence
 import com.gedalias.metricasopentelemetry.service.UserService
 import org.springframework.stereotype.Component
-import java.util.UUID
+import java.util.*
 
 @Component
 class UserServiceImpl(
-        private val userPersistence: UserPersistence
+        private val userPersistence: UserPersistence,
+        private val userMetrics: UserMetrics
 ): UserService {
+
+
     override fun listAll(): List<UserDTO> = userPersistence.listAll().map { it.toDTO() }
 
     override fun save(createUserDTO: CreateUserDTO) {
         userPersistence.save(createUserDTO.updateValues())
+                .also { userMetrics.incrementUserUpdated() }
     }
 
     override fun update(id: UUID, updateUserDTO: UpdateUserDTO) {
@@ -27,5 +32,6 @@ class UserServiceImpl(
         updateUserDTO
                 .updateValues(user)
                 .also(userPersistence::save)
+                .also { userMetrics.incrementUserUpdated() }
     }
 }
