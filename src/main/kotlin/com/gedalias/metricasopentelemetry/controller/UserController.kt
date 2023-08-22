@@ -5,6 +5,7 @@ import com.gedalias.metricasopentelemetry.domain.dto.UpdateUserDTO
 import com.gedalias.metricasopentelemetry.service.UserService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -29,15 +30,24 @@ class UserController(
             userService.save(createUserDTO)
             ResponseEntity.status(HttpStatus.CREATED).build<Any>()
         } catch (ex: Exception) {
-            ResponseEntity.internalServerError().build<Any>()
+            ResponseEntity.internalServerError().body(ex.message)
         }
 
     @PatchMapping("/{userId}")
-    fun updatePath(@PathVariable("userId") userId: UUID, @RequestBody updateUserDTO: UpdateUserDTO): ResponseEntity<*> =
+    fun updateUser(@PathVariable("userId") userId: UUID, @RequestBody updateUserDTO: UpdateUserDTO): ResponseEntity<*> =
             try {
                 userService.update(userId, updateUserDTO)
                 ResponseEntity.ok().build<Any>()
             } catch (ex: Exception) {
-                ResponseEntity.internalServerError().build<Any>()
+                ResponseEntity.internalServerError().body(ex.message)
+            }
+
+    @DeleteMapping("/{userId}")
+    fun deleteUser(@PathVariable("userId") userId: UUID): ResponseEntity<*> =
+            try {
+                userService.remove(userId)
+                ResponseEntity.status(HttpStatus.OK).build<Any>()
+            } catch (ex: Exception) {
+                ResponseEntity.internalServerError().body(ex.message)
             }
 }

@@ -13,4 +13,5 @@ interface UserService {
 
     fun update(id: UUID, updateUserDTO: UpdateUserDTO)
 
+    fun remove(id: UUID)
 }

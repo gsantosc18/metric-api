@@ -4,4 +4,6 @@ interface UserMetrics {
     fun incrementUserRegistered()
 
     fun incrementUserUpdated()
+
+    fun incrementUserRemoved()
 }

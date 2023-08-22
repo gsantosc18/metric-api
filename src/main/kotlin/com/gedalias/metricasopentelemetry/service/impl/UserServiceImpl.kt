@@ -34,4 +34,9 @@ class UserServiceImpl(
                 .also(userPersistence::save)
                 .also { userMetrics.incrementUserUpdated() }
     }
+
+    override fun remove(id: UUID) {
+        userPersistence.remove(id)
+                .also{ userMetrics.incrementUserRemoved() }
+    }
 }

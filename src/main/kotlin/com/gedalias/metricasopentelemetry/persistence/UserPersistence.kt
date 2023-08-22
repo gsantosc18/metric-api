@@ -11,4 +11,5 @@ interface UserPersistence {
 
     fun findById(id: UUID): User?
 
+    fun remove(id: UUID)
 }

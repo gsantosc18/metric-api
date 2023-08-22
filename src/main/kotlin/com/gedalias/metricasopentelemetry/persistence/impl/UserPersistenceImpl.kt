@@ -25,4 +25,8 @@ class UserPersistenceImpl(
     override fun findById(id: UUID): User? =
             userRepository.findByIdOrNull(id)?.toDomain()
 
+    override fun remove(id: UUID) {
+        userRepository.deleteById(id)
+    }
+
 }

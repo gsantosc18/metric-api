@@ -15,6 +15,7 @@ class UserMetricsImpl(
 ): UserMetrics {
     private lateinit var userRegisteredCounter: LongCounter
     private lateinit var userUpdatedCounter: LongCounter
+    private lateinit var userRemovedCounter: LongCounter
 
     companion object {
             private val TIME_PATTER = DateTimeFormatter.ofPattern("YYYY-MM-dd HH")
@@ -30,13 +31,22 @@ class UserMetricsImpl(
                 .setDescription("Quantidade de usuários atualizados")
                 .setUnit("1")
                 .build()
+
+        userRemovedCounter = meter.counterBuilder("users.removed")
+                .setDescription("Quantidade de usuários apagados")
+                .setUnit("1")
+                .build()
     }
 
     override fun incrementUserRegistered() {
-        userRegisteredCounter.add(1, Attributes.of(AttributeKey.stringKey("hour"), LocalDateTime.now().format(TIME_PATTER)))
+        userRegisteredCounter.add(1, Attributes.of(AttributeKey.stringKey("time"), LocalDateTime.now().format(TIME_PATTER)))
     }
 
     override fun incrementUserUpdated() {
-        userUpdatedCounter.add(1, Attributes.of(AttributeKey.stringKey("hour"), LocalDateTime.now().format(TIME_PATTER)))
+        userUpdatedCounter.add(1, Attributes.of(AttributeKey.stringKey("time"), LocalDateTime.now().format(TIME_PATTER)))
+    }
+
+    override fun incrementUserRemoved() {
+        userUpdatedCounter.add(1, Attributes.of(AttributeKey.stringKey("time"), LocalDateTime.now().format(TIME_PATTER)))
     }
 }
