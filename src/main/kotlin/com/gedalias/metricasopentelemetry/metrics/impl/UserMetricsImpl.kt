@@ -6,7 +6,7 @@ import io.opentelemetry.api.common.Attributes
 import io.opentelemetry.api.metrics.LongCounter
 import io.opentelemetry.api.metrics.Meter
 import org.springframework.stereotype.Component
-import java.time.LocalTime
+import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 @Component
@@ -17,7 +17,7 @@ class UserMetricsImpl(
     private lateinit var userUpdatedCounter: LongCounter
 
     companion object {
-        private val MINUTE_PATTER = DateTimeFormatter.ofPattern("HH:mm")
+            private val TIME_PATTER = DateTimeFormatter.ofPattern("YYYY-MM-dd HH")
     }
 
     init {
@@ -33,10 +33,10 @@ class UserMetricsImpl(
     }
 
     override fun incrementUserRegistered() {
-        userRegisteredCounter.add(1, Attributes.of(AttributeKey.stringKey("hour"), LocalTime.now().format(MINUTE_PATTER)))
+        userRegisteredCounter.add(1, Attributes.of(AttributeKey.stringKey("hour"), LocalDateTime.now().format(TIME_PATTER)))
     }
 
     override fun incrementUserUpdated() {
-        userUpdatedCounter.add(1, Attributes.of(AttributeKey.stringKey("hour"), LocalTime.now().format(MINUTE_PATTER)))
+        userUpdatedCounter.add(1, Attributes.of(AttributeKey.stringKey("hour"), LocalDateTime.now().format(TIME_PATTER)))
     }
 }

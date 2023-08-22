@@ -23,7 +23,7 @@ class UserServiceImpl(
 
     override fun save(createUserDTO: CreateUserDTO) {
         userPersistence.save(createUserDTO.updateValues())
-                .also { userMetrics.incrementUserUpdated() }
+                .also { userMetrics.incrementUserRegistered() }
     }
 
     override fun update(id: UUID, updateUserDTO: UpdateUserDTO) {
