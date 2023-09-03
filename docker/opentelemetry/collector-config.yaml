@@ -7,6 +7,11 @@ processors:
   batch:
 
 exporters:
+  kafka:
+    brokers:
+      - kafka:29092
+    encoding: otlp_json
+
   prometheus:
     endpoint: otel-collector:8889
 
@@ -25,6 +30,10 @@ service:
       receivers: [otlp]
       processors: [batch]
       exporters: [prometheus]
-  telemetry:
     logs:
-      level: debug
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [kafka]
+#  telemetry:
+#    logs:
+#      level: debug
