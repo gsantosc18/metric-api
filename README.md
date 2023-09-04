@@ -5,6 +5,7 @@ Projeto que tem como objetivo realizar o estudo de instrumentação de um projet
 # Tecnologias usadas
 
 - Spring Boot
+- MySql
 - OpenTelemetry
 - Jaeger
 - Prometheus
@@ -18,7 +19,7 @@ Projeto que tem como objetivo realizar o estudo de instrumentação de um projet
 
 # Arquitetura
 
-![Diagrama Metric API](./docs/Metric-api.png)
+![Diagrama Metric API](./docs/Metrics-api.png)
 
 # Como subir o ambiente
 Abra o terminal na pasta `docker`

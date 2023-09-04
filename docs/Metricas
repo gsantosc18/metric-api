@@ -1,1 +1,137 @@
-{"_type":"export","__export_format":4,"__export_date":"2023-08-17T11:44:20.212Z","__export_source":"insomnia.desktop.app:v2023.4.0","resources":[{"_id":"req_6ae15ff12e5e4c1497108d6c0e77d1a4","parentId":"fld_281e809902a840f78fc0e0dc686e95e3","modified":1692269189904,"created":1691974102095,"url":"localhost:8080/user","name":"Criar usuário","description":"","method":"POST","body":{"mimeType":"application/json","text":"{\n\t\"name\": \"Gedalias\",\n\t\"email\": \"gsantos@adfads\",\n\t\"birthday\": \"1995-12-12\"\n}"},"parameters":[],"headers":[{"name":"Content-Type","value":"application/json"}],"authentication":{},"metaSortKey":-1692236822277,"isPrivate":false,"settingStoreCookies":true,"settingSendCookies":true,"settingDisableRenderRequestBody":false,"settingEncodeUrl":true,"settingRebuildPath":true,"settingFollowRedirects":"global","_type":"request"},{"_id":"fld_281e809902a840f78fc0e0dc686e95e3","parentId":"wrk_16cc9707226441ddafec23bf5b33ed99","modified":1692269155960,"created":1692269155960,"name":"usuário","description":"","environment":{},"environmentPropertyOrder":null,"metaSortKey":-1692269155960,"_type":"request_group"},{"_id":"wrk_16cc9707226441ddafec23bf5b33ed99","parentId":null,"modified":1691969310501,"created":1691969310501,"name":"Metricas","description":"","scope":"collection","_type":"workspace"},{"_id":"req_379e72aa112a4fea8980089b5558b092","parentId":"fld_281e809902a840f78fc0e0dc686e95e3","modified":1692269198260,"created":1691969316672,"url":"localhost:8080/user","name":"Listar usuários","description":"","method":"GET","body":{},"parameters":[],"headers":[],"authentication":{},"metaSortKey":-1692236822220.75,"isPrivate":false,"settingStoreCookies":true,"settingSendCookies":true,"settingDisableRenderRequestBody":false,"settingEncodeUrl":true,"settingRebuildPath":true,"settingFollowRedirects":"global","_type":"request"},{"_id":"req_4fd6e651faf84034acf8ad556cbcc44d","parentId":"fld_281e809902a840f78fc0e0dc686e95e3","modified":1692269200143,"created":1692236822302,"url":"localhost:8080/user/3c5ccfc3-7999-49ee-b2d9-f62e7290ebcf","name":"Atualizar usuário","description":"","method":"PATCH","body":{"mimeType":"application/json","text":"{\n\t\"email\": \"gsantos@gmail.com\"\n}"},"parameters":[],"headers":[{"name":"Content-Type","value":"application/json"}],"authentication":{},"metaSortKey":-1692236822170.75,"isPrivate":false,"settingStoreCookies":true,"settingSendCookies":true,"settingDisableRenderRequestBody":false,"settingEncodeUrl":true,"settingRebuildPath":true,"settingFollowRedirects":"global","_type":"request"},{"_id":"env_4d585b73be8731f541ab1f2f93005a6839714294","parentId":"wrk_16cc9707226441ddafec23bf5b33ed99","modified":1691969310502,"created":1691969310502,"name":"Base Environment","data":{},"dataPropertyOrder":null,"color":null,"isPrivate":false,"metaSortKey":1691969310502,"_type":"environment"},{"_id":"jar_4d585b73be8731f541ab1f2f93005a6839714294","parentId":"wrk_16cc9707226441ddafec23bf5b33ed99","modified":1691969310503,"created":1691969310503,"name":"Default Jar","cookies":[],"_type":"cookie_jar"}]}
+{
+    "_type": "export",
+    "__export_format": 4,
+    "__export_date": "2023-08-17T11:44:20.212Z",
+    "__export_source": "insomnia.desktop.app:v2023.4.0",
+    "resources": [
+        {
+            "_id": "req_6ae15ff12e5e4c1497108d6c0e77d1a4",
+            "parentId": "fld_281e809902a840f78fc0e0dc686e95e3",
+            "modified": 1692269189904,
+            "created": 1691974102095,
+            "url": "localhost:8080/user",
+            "name": "Criar usuário",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"name\": \"Gedalias\",\n\t\"email\": \"gsantos@adfads\",\n\t\"birthday\": \"1995-12-12\"\n}"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1692236822277,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "fld_281e809902a840f78fc0e0dc686e95e3",
+            "parentId": "wrk_16cc9707226441ddafec23bf5b33ed99",
+            "modified": 1692269155960,
+            "created": 1692269155960,
+            "name": "usuário",
+            "description": "",
+            "environment": {},
+            "environmentPropertyOrder": null,
+            "metaSortKey": -1692269155960,
+            "_type": "request_group"
+        },
+        {
+            "_id": "wrk_16cc9707226441ddafec23bf5b33ed99",
+            "parentId": null,
+            "modified": 1691969310501,
+            "created": 1691969310501,
+            "name": "Metricas",
+            "description": "",
+            "scope": "collection",
+            "_type": "workspace"
+        },
+        {
+            "_id": "req_379e72aa112a4fea8980089b5558b092",
+            "parentId": "fld_281e809902a840f78fc0e0dc686e95e3",
+            "modified": 1692269198260,
+            "created": 1691969316672,
+            "url": "localhost:8080/user",
+            "name": "Listar usuários",
+            "description": "",
+            "method": "GET",
+            "body": {},
+            "parameters": [],
+            "headers": [],
+            "authentication": {},
+            "metaSortKey": -1692236822220.75,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_4fd6e651faf84034acf8ad556cbcc44d",
+            "parentId": "fld_281e809902a840f78fc0e0dc686e95e3",
+            "modified": 1692269200143,
+            "created": 1692236822302,
+            "url": "localhost:8080/user/3c5ccfc3-7999-49ee-b2d9-f62e7290ebcf",
+            "name": "Atualizar usuário",
+            "description": "",
+            "method": "PATCH",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"email\": \"gsantos@gmail.com\"\n}"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1692236822170.75,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "env_4d585b73be8731f541ab1f2f93005a6839714294",
+            "parentId": "wrk_16cc9707226441ddafec23bf5b33ed99",
+            "modified": 1691969310502,
+            "created": 1691969310502,
+            "name": "Base Environment",
+            "data": {},
+            "dataPropertyOrder": null,
+            "color": null,
+            "isPrivate": false,
+            "metaSortKey": 1691969310502,
+            "_type": "environment"
+        },
+        {
+            "_id": "jar_4d585b73be8731f541ab1f2f93005a6839714294",
+            "parentId": "wrk_16cc9707226441ddafec23bf5b33ed99",
+            "modified": 1691969310503,
+            "created": 1691969310503,
+            "name": "Default Jar",
+            "cookies": [],
+            "_type": "cookie_jar"
+        }
+    ]
+}
