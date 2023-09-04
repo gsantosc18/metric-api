@@ -26,13 +26,31 @@ Abra o terminal na pasta `docker`
 
 - Subir o ambiente
 
-> docker compose up -d --build
+```bash
+docker compose up -d --build
+```
 
 **Atenção:** Ao subir o ambiente certifique-se de ter ao menos 4Gb de memória RAM livre.
 
 - Derrubar o ambiente
 
-> docker compose down --remove-orphans
+```bash
+docker compose down --remove-orphans
+```
+
+- Subir um container específico
+
+Para subir um container específico é necessário informar o nome que foi configurado no arquivo `yaml`. Exemplo:
+
+```bash
+docker compose up otel-collector -d --build
+```
+
+- Derrubar um container específico
+
+```bash
+docker compose down otel-collector
+```
 
 # Referências
 
