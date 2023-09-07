@@ -1,13 +1,12 @@
 package com.gedalias.metricasopentelemetry.domain.dto
 
 import java.time.LocalDate
-import java.util.*
 
 data class UserDTO(
-        val id: UUID?,
-        val name: String,
-        val email: String,
-        val birthday: LocalDate
+        val id: String?,
+        val name: String?,
+        val email: String?,
+        val birthday: LocalDate?
 )
 
 data class CreateUserDTO(

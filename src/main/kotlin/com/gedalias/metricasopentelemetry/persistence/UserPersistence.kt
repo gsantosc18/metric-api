@@ -1,7 +1,6 @@
 package com.gedalias.metricasopentelemetry.persistence
 
 import com.gedalias.metricasopentelemetry.domain.User
-import java.util.UUID
 
 interface UserPersistence {
 
@@ -9,7 +8,7 @@ interface UserPersistence {
 
     fun save(user: User)
 
-    fun findById(id: UUID): User?
+    fun findById(id: String): User?
 
-    fun remove(id: UUID)
+    fun remove(id: String)
 }

@@ -5,14 +5,6 @@ import com.gedalias.metricasopentelemetry.domain.dto.CreateUserDTO
 import com.gedalias.metricasopentelemetry.domain.dto.UpdateUserDTO
 import com.gedalias.metricasopentelemetry.domain.dto.UserDTO
 
-
-fun UserDTO.updateValues() = User(
-        id = id,
-        name = name,
-        email = email,
-        birthday = birthday
-)
-
 fun User.toDTO() = UserDTO(
         id = id,
         name = name,
@@ -20,14 +12,21 @@ fun User.toDTO() = UserDTO(
         birthday = birthday
 )
 
-fun CreateUserDTO.updateValues() = User(
+fun UserDTO.toDomain() = User(
+        id = id,
+        name = name,
+        email = email,
+        birthday = birthday
+)
+
+fun CreateUserDTO.toDomain() = User(
         id = null,
         name = name,
         email = email,
         birthday = birthday
 )
 
-fun UpdateUserDTO.updateValues(user: User) = User(
+fun UpdateUserDTO.toDomain(user: User) = User(
         id = user.id,
         name = name ?: user.name,
         email = email ?: user.email,

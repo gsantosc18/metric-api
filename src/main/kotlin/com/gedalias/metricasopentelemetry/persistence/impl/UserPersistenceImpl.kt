@@ -7,7 +7,6 @@ import com.gedalias.metricasopentelemetry.persistence.mapper.toEntity
 import com.gedalias.metricasopentelemetry.persistence.repository.UserRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
-import java.util.*
 
 @Component
 class UserPersistenceImpl(
@@ -22,10 +21,10 @@ class UserPersistenceImpl(
                 .also(userRepository::save)
     }
 
-    override fun findById(id: UUID): User? =
+    override fun findById(id: String): User? =
             userRepository.findByIdOrNull(id)?.toDomain()
 
-    override fun remove(id: UUID) {
+    override fun remove(id: String) {
         userRepository.deleteById(id)
     }
 
