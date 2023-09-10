@@ -10,11 +10,13 @@ log-pipeline:
         - name: otlp_logs
           group_id: data-prepper-consumer
   processor:
-    - grok:
-        match:
-          # This will match logs with a "log" key against the COMMONAPACHELOG pattern (ex: { "log": "actual apache log..." } )
-          # You should change this to match what your logs look like. See the grok documenation to get started.
-          log: [ "%{COMMONAPACHELOG}" ]
+#    - grok:
+#        match:
+#          # This will match logs with a "log" key against the COMMONAPACHELOG pattern (ex: { "log": "actual apache log..." } )
+#          # You should change this to match what your logs look like. See the grok documenation to get started.
+#          log: [ "%{COMMONAPACHELOG}" ]
+    - parse_json:
+
   sink:
     - opensearch:
         hosts: [ "https://opensearch-node1:9200" ]
@@ -31,4 +33,4 @@ log-pipeline:
         #aws_region: us-east-1
         # Since we are grok matching for apache logs, it makes sense to send them to an OpenSearch index named apache_logs.
         # You should change this to correspond with how your OpenSearch indices are set up.
-        index: apache_logs
+        index: metrics-api
