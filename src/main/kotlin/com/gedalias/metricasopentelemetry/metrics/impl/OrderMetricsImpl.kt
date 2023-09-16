@@ -1,8 +1,9 @@
 package com.gedalias.metricasopentelemetry.metrics.impl
 
-import com.gedalias.metricasopentelemetry.domain.dto.OrderDTO
+import com.gedalias.metricasopentelemetry.domain.Order
 import com.gedalias.metricasopentelemetry.metrics.OrderMetrics
 import io.opentelemetry.api.common.AttributeKey.stringKey
+import io.opentelemetry.api.common.Attributes
 import io.opentelemetry.api.common.Attributes.of
 import io.opentelemetry.api.metrics.LongCounter
 import io.opentelemetry.api.metrics.Meter
@@ -21,8 +22,9 @@ class OrderMetricsImpl(
                 .build()
     }
 
-    override fun incrementOrder(orderDTO: OrderDTO) {
-        orderCounter.add(1, of(stringKey("status"), orderDTO.status!!.name))
+    override fun incrementOrder(order: Order) {
+        orderCounter.add(1, order.attributes())
     }
 
+    fun Order.attributes(): Attributes = of(stringKey("status"), status!!.name)
 }

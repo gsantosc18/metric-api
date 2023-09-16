@@ -36,7 +36,7 @@ class ScheduleConfig(
                     it.valid()
                 }
                 .also {
-                    logger.info("Serão canceladas {} pedido(s) : {}", it.size, it)
+                    logger.info("Serão atualizados {} pedido(s) : {}", it.size, it)
                 }
                 .map {
                     UpdateOrderDTO(
@@ -49,7 +49,6 @@ class ScheduleConfig(
                 }
                 .forEach{
                     orderService.update(it.id!!, it)
-                    logger.info("Atualização do pedido : {}", it)
                 }
     }
 

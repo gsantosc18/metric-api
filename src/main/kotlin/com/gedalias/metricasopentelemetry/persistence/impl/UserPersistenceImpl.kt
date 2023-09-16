@@ -1,6 +1,7 @@
 package com.gedalias.metricasopentelemetry.persistence.impl
 
 import com.gedalias.metricasopentelemetry.domain.User
+import com.gedalias.metricasopentelemetry.metrics.annotation.UserCounter
 import com.gedalias.metricasopentelemetry.persistence.UserPersistence
 import com.gedalias.metricasopentelemetry.persistence.mapper.toDomain
 import com.gedalias.metricasopentelemetry.persistence.mapper.toEntity

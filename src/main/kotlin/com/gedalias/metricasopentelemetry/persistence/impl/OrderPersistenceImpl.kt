@@ -1,6 +1,7 @@
 package com.gedalias.metricasopentelemetry.persistence.impl
 
 import com.gedalias.metricasopentelemetry.domain.Order
+import com.gedalias.metricasopentelemetry.metrics.annotation.OrderCounter
 import com.gedalias.metricasopentelemetry.persistence.OrderPersistence
 import com.gedalias.metricasopentelemetry.persistence.mapper.toDomain
 import com.gedalias.metricasopentelemetry.persistence.mapper.toEntity
@@ -16,6 +17,7 @@ class OrderPersistenceImpl(
             repository.findAll()
                     .map { it.toDomain() }
 
+    @OrderCounter
     override fun save(order: Order): Order =
             order.toEntity()
                 .let(repository::save)
@@ -24,6 +26,7 @@ class OrderPersistenceImpl(
     override fun findById(id: String): Order? =
             repository.findByIdOrNull(id)?.toDomain()
 
+    @OrderCounter
     override fun update(id: String, order: Order) =
             repository.findByIdOrNull(id)
                     ?.let { o ->
