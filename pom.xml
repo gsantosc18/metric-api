@@ -16,6 +16,7 @@
 	<properties>
 		<java.version>17</java.version>
 		<kotlin.version>1.8.22</kotlin.version>
+		<mockkVersion>1.13.8</mockkVersion>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -87,6 +88,12 @@
 		<dependency>
 			<groupId>org.springframework.kafka</groupId>
 			<artifactId>spring-kafka-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.mockk</groupId>
+			<artifactId>mockk-jvm</artifactId>
+			<version>${mockkVersion}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

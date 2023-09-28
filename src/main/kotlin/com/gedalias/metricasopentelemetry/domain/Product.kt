@@ -9,11 +9,18 @@ data class Product(
         val value: BigDecimal?
 ) {
 
-    constructor(id: String?): this(
+    companion object {
+        fun create(
+            id: String? = null,
+            title: String? = null,
+            description: String? = null,
+            value: BigDecimal? = null
+        ): Product = Product(
             id = id,
             title = null,
             description = null,
             value = null
-    )
+        )
+    }
 
 }

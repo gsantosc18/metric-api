@@ -1,5 +1,21 @@
 package com.gedalias.metricasopentelemetry.domain
 
-enum class OrderStatus {
-    PENDING, CANCELLED, PAID
+import java.time.LocalDateTime
+
+data class OrderStatus(
+    val orderId: String?,
+    val description: String?,
+    val createdAt: LocalDateTime?
+) {
+    companion object {
+        fun create(
+            orderId: String? = null,
+            description: String? = null,
+            createdAt: LocalDateTime? = null
+        ) = OrderStatus(
+            orderId = orderId,
+            description = description,
+            createdAt = createdAt
+        )
+    }
 }
