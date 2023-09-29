@@ -5,7 +5,7 @@ import com.gedalias.metricasopentelemetry.infra.database.entity.OrderEntity
 
 fun OrderEntity.toDomain() = Order(
         id = id,
-        user = user.toDomain(),
+        user = user?.toDomain(),
         products = products?.map { it.toDomain() },
         value = value,
         status = status,
@@ -15,10 +15,10 @@ fun OrderEntity.toDomain() = Order(
 
 fun Order.toEntity() = OrderEntity(
         id = null,
-        user = requireNotNull(user).toEntity(),
+        user = user?.toEntity(),
         products = products?.map { it.toEntity() },
-        value = requireNotNull(value),
-        status = requireNotNull(status)
+        value = value,
+        status = status
 )
 
 fun Order.update(id: String) =

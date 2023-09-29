@@ -15,19 +15,19 @@ import java.time.LocalDateTime
 data class OrderEntity(
     @GeneratedValue(strategy = GenerationType.UUID)
         @Id val id: String?,
-    @ManyToOne(fetch = EAGER)
+    @ManyToOne(fetch = EAGER, cascade = [CascadeType.ALL])
         @JoinColumn(name = "user_id", nullable = false)
-        val user: UserEntity,
-    @ManyToMany(fetch = EAGER)
+        val user: UserEntity?,
+    @ManyToMany(fetch = EAGER, cascade = [CascadeType.ALL])
         @JoinTable(
                 name = "order_product",
                 joinColumns = [ JoinColumn(name = "order_id") ],
                 inverseJoinColumns = [ JoinColumn(name = "product_id") ]
         )
         var products: List<ProductEntity>?,
-    val value: BigDecimal,
+    val value: BigDecimal?,
     @Enumerated(EnumType.STRING)
-        val status: Status,
+        val status: Status?,
     @CreatedDate
         var createdAt: LocalDateTime? = null,
     @LastModifiedDate

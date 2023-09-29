@@ -1,39 +1,40 @@
 package com.gedalias.metricasopentelemetry.infra.http.controller
 
-import com.gedalias.metricasopentelemetry.application.service.OrderService
-import org.slf4j.LoggerFactory
+import com.gedalias.metricasopentelemetry.application.usecase.CreateNewOrder
+import com.gedalias.metricasopentelemetry.application.usecase.ListOrders
+import com.gedalias.metricasopentelemetry.infra.http.dto.CreateOrderDTO
+import com.gedalias.metricasopentelemetry.infra.http.dto.OrderDTO
+import com.gedalias.metricasopentelemetry.infra.http.mapper.toDTO
+import com.gedalias.metricasopentelemetry.infra.http.mapper.toDomain
+import org.springframework.http.HttpStatus
+import org.springframework.http.MediaType
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/order")
 class OrderController(
-        private val orderService: OrderService
+    private val listOrders: ListOrders,
+    private val createNewOrder: CreateNewOrder
 ) {
+    @GetMapping
+    fun listAll(orderDTO: OrderDTO?): List<OrderDTO> =
+        listOrders.execute(orderDTO?.toDomain())
+            .map { it.toDTO() }
 
-    companion object {
-        private val logger = LoggerFactory.getLogger(this::class.java)
-    }
+    @PostMapping(produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun create(@RequestBody createOrderDTO: CreateOrderDTO): ResponseEntity<*> =
+        try {
+            val createdOrder = createOrderDTO.toDomain().let(createNewOrder::execute)
+            ResponseEntity.status(HttpStatus.CREATED).body(createdOrder)
+        } catch (ex: Exception) {
+            ResponseEntity.internalServerError().body(mapOf("error" to ex.message))
+        }
 
-//    @GetMapping
-//    fun listAll(): List<OrderDTO> =
-//            orderService.all()
-//
-//    @PostMapping
-//    fun create(@RequestBody createOrderDTO: CreateOrderDTO): ResponseEntity<*> =
-//            try {
-//                logger.info("Start create new order: {}", createOrderDTO)
-//                orderService.save(createOrderDTO)
-//                        .also { logger.info("Created order with success: {}", it) }
-//                        .let(status(HttpStatus.CREATED)::body)
-//            } catch (ex: Exception) {
-//                status(HttpStatus.INTERNAL_SERVER_ERROR)
-//                        .body(mapOf(
-//                                "error" to ex.message,
-//                                "trace" to ex.stackTrace
-//                        ))
-//            }
-//
 //    @GetMapping("/{id}")
 //    fun findById(@PathVariable("id") id: String): ResponseEntity<*> =
 //            try {

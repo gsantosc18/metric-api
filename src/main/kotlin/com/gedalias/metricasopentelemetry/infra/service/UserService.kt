@@ -5,15 +5,19 @@ import com.gedalias.metricasopentelemetry.domain.User
 import com.gedalias.metricasopentelemetry.infra.database.repository.UserRepository
 import com.gedalias.metricasopentelemetry.infra.service.mapper.toDomain
 import com.gedalias.metricasopentelemetry.infra.service.mapper.toEntity
+import org.springframework.data.domain.Example
 import org.springframework.stereotype.Service
 
 @Service
-class UserServiceImpl(
+class UserService(
     private val userRepository: UserRepository
 ): UserService {
-    override fun findBy(user: User?): List<User> {
-        TODO("Not yet implemented")
-    }
+    override fun findBy(user: User?): List<User> =
+        when {
+            user != null -> userRepository.findAll(Example.of(user.toEntity()))
+            else -> userRepository.findAll()
+        }
+        .map { it.toDomain() }
 
     override fun save(user: User): User =
         user.toEntity()

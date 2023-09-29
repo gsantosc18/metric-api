@@ -7,13 +7,15 @@ import com.gedalias.metricasopentelemetry.infra.service.mapper.toEntity
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import org.springframework.data.domain.Example
 import java.sql.SQLIntegrityConstraintViolationException
 
-class UserServiceImplTest {
+class UserServiceTest {
     private val userRepository: UserRepository = mockk(relaxed = true)
-    private val userService = UserServiceImpl(userRepository)
+    private val userService = UserService(userRepository)
 
     @Test
     fun `Save new user`() {
@@ -33,5 +35,31 @@ class UserServiceImplTest {
         assertThrows<SQLIntegrityConstraintViolationException> { userService.save(User.create()) }
 
         verify { userRepository.save(any()) }
+    }
+
+    @Test
+    fun `Find users by filter`() {
+        val userEntity = UserEntity(id = null, name = null, birthday = null, email = null)
+
+        every { userRepository.findAll(any<Example<UserEntity>>()) } returns listOf(userEntity)
+
+        val findBy = userService.findBy(User.create(name = "Jhon Doel"))
+
+        verify { userRepository.findAll(any<Example<UserEntity>>()) }
+
+        assertEquals(1, findBy.size)
+    }
+
+    @Test
+    fun `Find users without filter`() {
+        val userEntity = UserEntity(id = null, name = null, birthday = null, email = null)
+
+        every { userRepository.findAll() } returns listOf(userEntity)
+
+        val findBy = userService.findBy(null)
+
+        verify { userRepository.findAll() }
+
+        assertEquals(1, findBy.size)
     }
 }
