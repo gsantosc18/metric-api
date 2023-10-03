@@ -7,10 +7,11 @@ import com.gedalias.metricasopentelemetry.infra.service.mapper.toEntity
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
-import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.springframework.data.domain.Example
+import org.springframework.data.repository.findByIdOrNull
 import java.sql.SQLIntegrityConstraintViolationException
 
 class UserServiceTest {
@@ -61,5 +62,25 @@ class UserServiceTest {
         verify { userRepository.findAll() }
 
         assertEquals(1, findBy.size)
+    }
+
+    @Test
+    fun `Find user by id and return domain`() {
+        val userId = "111"
+
+        val userEntity = UserEntity(id = userId, name = null, birthday = null, email = null)
+
+        every { userRepository.findByIdOrNull(userId) } returns userEntity
+
+        val findById = userService.findById(userId)
+
+        assertNotNull(findById)
+        assertEquals(userId, findById?.id)
+    }
+
+    @Test
+    fun `Find user by id and return null if not found`() {
+        every { userRepository.findByIdOrNull("111") } returns null
+        assertNull(userService.findById("111"))
     }
 }

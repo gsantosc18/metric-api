@@ -19,7 +19,5 @@ data class ProductEntity(
         @CreatedDate
         var createdAt: LocalDateTime? = null,
         @LastModifiedDate
-        var updatedAt: LocalDateTime? = null,
-        @ManyToMany(mappedBy = "products")
-        val orders: List<OrderEntity> = emptyList()
+        var updatedAt: LocalDateTime? = null
 )

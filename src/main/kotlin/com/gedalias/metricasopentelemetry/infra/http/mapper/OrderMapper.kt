@@ -31,7 +31,7 @@ fun Order.toDTO() = OrderDTO(
 fun CreateOrderDTO.toDomain() = Order(
         id = null,
         user = User.create(id = user),
-        products = products.map { Product.create(id = it) },
+        products = products?.map { Product.create(id = it) },
         value = value,
         status = PENDING,
         createdAt = null,

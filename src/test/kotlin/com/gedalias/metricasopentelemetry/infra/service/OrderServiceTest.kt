@@ -12,7 +12,9 @@ import io.mockk.verify
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.springframework.data.domain.Example
+import org.springframework.data.repository.findByIdOrNull
 import java.math.BigDecimal.TEN
+import java.time.LocalDate
 
 class OrderServiceTest {
     private val orderRepository: OrderRepository = mockk(relaxed = true)
@@ -55,5 +57,19 @@ class OrderServiceTest {
         orderService.findBy(null)
 
         verify { orderRepository.findAll() }
+    }
+
+    @Test
+    fun `Find orders status by orderId`() {
+        val orderId = "111"
+
+        val userEntity = UserEntity(id = "1", name = "John", email = "jhon@email.com", birthday = LocalDate.parse("2023-01-01"))
+        val orderEntity = OrderEntity(id = orderId, user = userEntity, products = emptyList(), value = TEN, status = PENDING)
+
+        every { orderRepository.findByIdOrNull(orderId) } returns orderEntity
+
+        orderService.findById(orderId)
+
+        verify { orderRepository.findByIdOrNull(orderId) }
     }
 }

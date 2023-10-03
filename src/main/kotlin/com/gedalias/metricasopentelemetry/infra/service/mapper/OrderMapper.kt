@@ -14,7 +14,7 @@ fun OrderEntity.toDomain() = Order(
 )
 
 fun Order.toEntity() = OrderEntity(
-        id = null,
+        id = id,
         user = user?.toEntity(),
         products = products?.map { it.toEntity() },
         value = value,

@@ -15,10 +15,10 @@ class CreateNewOrderStatus(
     override fun execute(command: OrderStatus): OrderStatus {
         val order = orderService.findById(requireNotNull(command.orderId))
         if (isNull(order)) {
-            throw OrderNotFoundException("OrderId ${command.orderId} not found")
+            throw OrderNotFoundException("Order ${command.orderId} not found")
         }
         if(order?.status != PENDING) {
-            throw OrderStatusNotPendingException("Order status is not pending: status=${order?.status}")
+            throw OrderStatusNotPendingException("Order ${command.orderId} is not pending")
         }
         return orderStatusService.save(command)
     }

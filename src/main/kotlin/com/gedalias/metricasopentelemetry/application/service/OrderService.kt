@@ -10,6 +10,4 @@ interface OrderService {
 
     fun findById(id: String): Order?
 
-    fun update(id: String, order: Order): Order?
-
 }

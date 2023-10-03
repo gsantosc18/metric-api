@@ -7,5 +7,4 @@ interface ProductService {
     fun save(product: Product): Product
 
     fun findBy(product: Product?): List<Product>
-
 }

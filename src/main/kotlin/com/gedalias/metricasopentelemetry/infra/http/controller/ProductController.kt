@@ -1,46 +1,33 @@
 package com.gedalias.metricasopentelemetry.infra.http.controller
 
-import com.gedalias.metricasopentelemetry.application.service.ProductService
+import com.gedalias.metricasopentelemetry.application.usecase.CreateNewProduct
+import com.gedalias.metricasopentelemetry.application.usecase.ListProducts
+import com.gedalias.metricasopentelemetry.infra.http.dto.CreateProductDTO
+import com.gedalias.metricasopentelemetry.infra.http.dto.ProductDTO
+import com.gedalias.metricasopentelemetry.infra.http.mapper.toDomain
+import jakarta.validation.Valid
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
+import org.springframework.http.ResponseEntity.ok
+import org.springframework.http.ResponseEntity.status
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/product")
 class ProductController(
-        private val productService: ProductService
+    private val createNewProduct: CreateNewProduct,
+    private val listProducts: ListProducts
 ) {
-//    companion object {
-//        private val logger = LoggerFactory.getLogger(this::class.java)
-//    }
-//
-//    @GetMapping
-//    fun listAll(): ResponseEntity<*> = try {
-//        productService.findBy()
-//                .let { ok().body(it) }
-//    } catch (ex: Exception) {
-//        status(INTERNAL_SERVER_ERROR)
-//                .body(mapOf(
-//                        "error" to ex.message,
-//                        "trace" to ex.stackTrace
-//                ))
-//    }
-//
-//    @PostMapping
-//    fun create(@RequestBody createProductDTO: CreateProductDTO): ResponseEntity<*> = try {
-//        logger.info("Start creation product: {}", createProductDTO)
-//        productService.save(createProductDTO)
-//                .also {
-//                    logger.info("Product created with success : {}", it)
-//                }
-//                .let {
-//                    status(CREATED).body(it)
-//                }
-//    } catch (ex: Exception) {
-//        status(INTERNAL_SERVER_ERROR)
-//                .body(mapOf(
-//                        "error" to ex.message,
-//                        "trace" to ex.stackTrace
-//                ))
-//    }
+    @GetMapping
+    fun listAll(productDTO: ProductDTO): ResponseEntity<*> =
+        ok().body(listProducts.execute(productDTO.toDomain()))
+
+    @PostMapping
+    fun create(@RequestBody @Valid createProductDTO: CreateProductDTO): ResponseEntity<*> =
+        status(HttpStatus.CREATED).body(createNewProduct.execute(createProductDTO.toDomain()))
 
 }

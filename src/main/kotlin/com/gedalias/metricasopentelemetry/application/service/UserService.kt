@@ -8,7 +8,5 @@ interface UserService {
 
     fun save(user: User): User
 
-    fun update(id: String, user: User)
-
-    fun remove(id: String)
+    fun findById(id: String): User?
 }

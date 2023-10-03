@@ -2,7 +2,6 @@ package com.gedalias.metricasopentelemetry.infra.http.mapper
 
 import com.gedalias.metricasopentelemetry.domain.User
 import com.gedalias.metricasopentelemetry.infra.http.dto.CreateUserDTO
-import com.gedalias.metricasopentelemetry.infra.http.dto.UpdateUserDTO
 import com.gedalias.metricasopentelemetry.infra.http.dto.UserDTO
 
 fun User.toDTO() = UserDTO(
@@ -24,11 +23,4 @@ fun CreateUserDTO.toDomain() = User(
     name = name,
     email = email,
     birthday = birthday
-)
-
-fun UpdateUserDTO.toDomain(user: User) = User(
-    id = user.id,
-    name = name ?: user.name,
-    email = email ?: user.email,
-    birthday = birthday ?: user.birthday
 )
