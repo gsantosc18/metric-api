@@ -3,15 +3,23 @@ package com.gedalias.metricasopentelemetry.domain
 import java.time.LocalDate
 
 data class User(
-        val id: String?,
-        val name: String?,
-        val email: String?,
-        val birthday: LocalDate?
+    val id: String?,
+    val name: String?,
+    val email: String?,
+    val birthday: LocalDate?
 ) {
-    constructor(id: String?): this(
+
+    companion object {
+        fun create(
+            id: String? = null,
+            name: String? = null,
+            email: String? = null,
+            birthday: LocalDate? = null
+        ) = User(
             id = id,
-            name = null,
-            email = null,
-            birthday = null
-    )
+            name = name,
+            email = email,
+            birthday = birthday
+        )
+    }
 }
