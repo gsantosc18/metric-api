@@ -39,11 +39,11 @@ services:
     depends_on:
       - db
       - otel-collector
-      - jaeger
+      - zipkin
       - kafka
 
   otel-collector:
-    image: otel/opentelemetry-collector-contrib:latest
+    image: otel/opentelemetry-collector-contrib:0.84.0
     container_name: otel-collector
     restart: always
     command: ["--config=/etc/collector-config.yaml"]
@@ -59,7 +59,7 @@ services:
     networks:
       - dev-infra
     depends_on:
-      - jaeger
+      - zipkin
       - kafka
 
   jaeger:
@@ -68,6 +68,17 @@ services:
     ports:
       - 16686:16686
       - 14250:14250
+    networks:
+      - dev-infra
+
+  zipkin:
+    container_name: zipkin
+    image: ghcr.io/openzipkin/zipkin-slim:latest
+    environment:
+      - STORAGE_TYPE=mem
+      - MYSQL_HOST=mysql
+    ports:
+      - 9411:9411
     networks:
       - dev-infra
 

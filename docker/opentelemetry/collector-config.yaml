@@ -20,12 +20,17 @@ exporters:
     tls:
       insecure: true
 
+  zipkin:
+    endpoint: "http://zipkin:9411/api/v2/spans"
+    tls:
+      insecure_skip_verify: true
+
 service:
   pipelines:
     traces:
       receivers: [otlp]
       processors: [batch]
-      exporters: [jaeger]
+      exporters: [zipkin,jaeger]
     metrics:
       receivers: [otlp]
       processors: [batch]
