@@ -16,6 +16,7 @@ Projeto que tem como objetivo realizar o estudo de instrumentação de um projet
 - Kafka UI
 - Docker
 - Docker Compose
+- Zipkin
 
 # Arquitetura
 
