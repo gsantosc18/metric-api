@@ -10,7 +10,7 @@ exporters:
   kafka:
     brokers:
       - kafka:29092
-    encoding: otlp_json
+    encoding: raw
 
   prometheus:
     endpoint: otel-collector:8889
